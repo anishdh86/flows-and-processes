@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import axios from 'axios';
+import React, { useEffect, useState } from 'react';
 
 import './App.css';
 import FlowsList from './components/content/flows/Flows-list';
@@ -10,12 +11,12 @@ function App() {
   const apiUrl = 'https://orchestrationflowapp.azurewebsites.net/flow';
 
   const [flows, setFlows] = useState<Flow[]>([]);
-
-  fetch(apiUrl)
-    .then((response) => response.json())
-    .then((data) => {
-      setFlows(data);
+  
+  useEffect(() => {
+    axios.get<Flow[]>(apiUrl).then(response => {
+      return setFlows(response.data)
     });
+  }, []);
 
   return (
     <div className="App">

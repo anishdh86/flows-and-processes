@@ -1,6 +1,12 @@
-const Card: React.FC = ({children}) => {
+interface CardProps {
+  className?: string;
+  children: React.ReactNode
+}
+
+const Card: React.FC<CardProps> = ({className, children}) => {
+
   return (
-    <div className={'card '}>
+    <div className={'card ' + className}>
       <div className="card-body">
         {children}
       </div>
